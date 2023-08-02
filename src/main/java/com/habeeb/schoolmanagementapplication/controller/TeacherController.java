@@ -12,11 +12,12 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
+@RequestMapping("/teacher")
 public class TeacherController {
 
    TeacherService teacherService;
 
-    @PostMapping("/teacher/course/{courseId}/level/{levelId}")
+    @PostMapping("/course/{courseId}/level/{levelId}")
     public ResponseEntity<Teacher> saveTeacher(@RequestBody Teacher teacher,@PathVariable Long courseId,@PathVariable Long levelId){
         return new ResponseEntity<>(teacherService.saveTeacher(teacher,courseId,levelId), HttpStatus.OK);
     }
@@ -27,14 +28,20 @@ public class TeacherController {
         return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
 
-    @GetMapping("/teacher/course/{courseId}")
+    @GetMapping("/course/{courseId}")
     public ResponseEntity<List<Teacher>> getCourseTeachers(@PathVariable Long courseId) {
         return new ResponseEntity<>(teacherService.getCourseTeachers(courseId), HttpStatus.OK);
     }
 
-    @GetMapping("/teacher/level/{levelId}")
+    @GetMapping("/level/{levelId}")
     public ResponseEntity<List<Teacher>> getLevelTeachers(@PathVariable Long levelId) {
         return new ResponseEntity<>(teacherService.getLevelTeachers(levelId), HttpStatus.OK);
     }
-    
+
+    @DeleteMapping("/course/{courseId}/level/{levelId}")
+    public ResponseEntity<HttpStatus> removeTeacher(@PathVariable Long courseId, @PathVariable Long levelId){
+        teacherService.removeTeacher(courseId,levelId);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
 }

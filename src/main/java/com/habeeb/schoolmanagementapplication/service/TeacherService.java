@@ -54,11 +54,17 @@ public class TeacherService {
         Teacher selectedTeacher=getTeacher(teacherId);
         Optional<Level> level=levelRepo.findById(levelId);
         Optional<Course> course=courseRepo.findById(courseId);
-        if(level.isPresent()){
+        if(level.isPresent()&&course.isPresent()){
             Level selectedLevel=level.get();
+            Course selectedCourse=course.get();
             selectedTeacher.setLevel(selectedLevel);
+            selectedTeacher.setCourse(selectedCourse);
         }else throw new CourseNotFoundException(courseId,levelId);
         teacherRepo.save(selectedTeacher);
+    }
+
+    public void removeTeacher(Long courseId,Long levelId){
+        teacherRepo.deleteByCourseIdAndLevelId(courseId,levelId);
     }
 
 

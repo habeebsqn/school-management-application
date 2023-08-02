@@ -12,27 +12,28 @@ import java.util.List;
 
 @AllArgsConstructor
 @RestController
+@RequestMapping("/level")
 public class LevelController {
 
     LevelService levelService;
 
-    @PostMapping("/level/add")
+    @PostMapping("/add")
     public ResponseEntity<HttpStatus> addClass(@RequestBody Level level){
         levelService.addLevel(level);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PutMapping("/level/update/{levelId}")
+    @PutMapping("/update/level/{levelId}")
     public ResponseEntity<Level> updateLevel(@PathVariable Long levelId,@RequestBody Level level){
         return new ResponseEntity<>(levelService.updateLevel(levelId,level),HttpStatus.ACCEPTED);
     }
 
-    @GetMapping("/level/all")
+    @GetMapping("/get/all")
     public ResponseEntity<List<Level>> getAllLevels(){
         return new ResponseEntity<>(levelService.getAllLevels(),HttpStatus.OK);
     }
 
-    @DeleteMapping("/level/delete/{levelId}")
+    @DeleteMapping("/delete/level/{levelId}")
     public ResponseEntity<Level> deleteLevel(@PathVariable Long levelId){
         levelService.deleteLevel(levelId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

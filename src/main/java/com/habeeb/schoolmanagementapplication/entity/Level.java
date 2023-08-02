@@ -20,7 +20,7 @@ public class Level {
     private Long id;
     @Column(name = "school",nullable = false)
     private String school;
-    @Column(name = "name", nullable = false, unique = true)
+    @Column(name = "name", nullable = false)
     private String name;
 
 
