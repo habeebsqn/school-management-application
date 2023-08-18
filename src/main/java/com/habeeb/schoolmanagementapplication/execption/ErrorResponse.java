@@ -7,6 +7,7 @@ public class ErrorResponse {
 
     private List<String> message;
 
+
     public ErrorResponse(List<String> message) {
         this.message = message;
     }
